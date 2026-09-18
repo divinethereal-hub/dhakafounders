@@ -1,3 +1,9 @@
+/* ── Google Fonts — Brand Typography
+   Plus Jakarta Sans : Headings (700, 800)
+   Inter             : Body     (400, 500)
+   ---------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500&display=swap");
+
 @import "tailwindcss";
 
 /* ============================================================
@@ -9,53 +15,56 @@
 @theme {
   /* Primary Cyan (Electric Sky Cyan)
      Use: high-contrast CTAs, badge highlights, text gradients */
-  --color-brand-cyan:        #0EA5E9;
-  --color-brand-cyan-dark:   #0284C7;
+  --color-brand-cyan: #0EA5E9;
+  --color-brand-cyan-dark: #0284C7;
 
   /* Secondary Navy (Deep Slate Navy)
      Use: footer, dark cards, primary text */
-  --color-brand-navy:        #0F172A;
+  --color-brand-navy: #0F172A;
 
   /* Secondary Surface (Soft Ice Cyan)
      Use: hero background glow, subtle card backgrounds */
-  --color-brand-ice:         #F0F9FF;
+  --color-brand-ice: #F0F9FF;
 
   /* Accent Border / Divider (Light Cyan)
      Use: glassmorphic card borders, section dividers */
-  --color-brand-border:      #BAE6FD;
+  --color-brand-border: #BAE6FD;
 
   /* Semantic aliases — consumed by Tailwind utilities */
-  --color-primary:           var(--color-brand-cyan);
-  --color-primary-hover:     var(--color-brand-cyan-dark);
-  --color-surface:           var(--color-brand-ice);
-  --color-dark:              var(--color-brand-navy);
-  --color-divider:           var(--color-brand-border);
+  --color-primary: var(--color-brand-cyan);
+  --color-primary-hover: var(--color-brand-cyan-dark);
+  --color-surface: var(--color-brand-ice);
+  --color-dark: var(--color-brand-navy);
+  --color-divider: var(--color-brand-border);
 
   /* ── Typography
      Headings : Plus Jakarta Sans — 700 / 800
      Body      : Inter            — 400 / 500             */
-  --font-heading:            "Plus Jakarta Sans", sans-serif;
-  --font-body:               "Inter", sans-serif;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
 
   /* Font weight tokens */
-  --font-weight-heading-base:  700;
-  --font-weight-heading-bold:  800;
-  --font-weight-body-regular:  400;
-  --font-weight-body-medium:   500;
+  --font-weight-heading-base: 700;
+  --font-weight-heading-bold: 800;
+  --font-weight-body-regular: 400;
+  --font-weight-body-medium: 500;
 
   /* ── Spacing / Radius Tokens */
-  --radius-card:   1rem;
-  --radius-btn:    0.625rem;
-  --radius-badge:  9999px;
+  --radius-card: 1rem;
+  --radius-btn: 0.625rem;
+  --radius-badge: 9999px;
 
   /* ── Shadow Tokens */
-  --shadow-cyan-sm:  0 4px 24px rgba(14, 165, 233, 0.30);
-  --shadow-cyan-lg:  0 8px 32px rgba(14, 165, 233, 0.45);
+  --shadow-cyan-sm: 0 4px 24px rgba(14, 165, 233, 0.30);
+  --shadow-cyan-lg: 0 8px 32px rgba(14, 165, 233, 0.45);
 }
 
 /* ── 2. Base Layer — Typography & Reset ── */
 @layer base {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -69,19 +78,24 @@
   }
 
   body {
-    font-family:   var(--font-body);
-    font-weight:   var(--font-weight-body-regular);
-    line-height:   1.6;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body-regular);
+    line-height: 1.6;
     background-color: #ffffff;
-    color:         var(--color-brand-navy);
+    color: var(--color-brand-navy);
   }
 
   /* Headings — Plus Jakarta Sans, default 700 */
-  h1, h2, h3, h4, h5, h6 {
-    font-family:  var(--font-heading);
-    font-weight:  var(--font-weight-heading-base);
-    line-height:  1.15;
-    color:        var(--color-brand-navy);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-base);
+    line-height: 1.15;
+    color: var(--color-brand-navy);
   }
 
   /* h1 gets the extra punch — 800 as per brand DNA */
@@ -90,12 +104,15 @@
   }
 
   /* Body medium weight for labels, captions, badges */
-  p, li, span {
+  p,
+  li,
+  span {
     font-family: var(--font-body);
     font-weight: var(--font-weight-body-regular);
   }
 
-  strong, b {
+  strong,
+  b {
     font-weight: var(--font-weight-body-medium);
   }
 
@@ -110,12 +127,10 @@
 
   /* ── Text Gradient (Cyan) */
   .text-gradient-cyan {
-    background: linear-gradient(
-      135deg,
-      var(--color-brand-cyan)      0%,
-      #38BDF8                      50%,
-      #7DD3FC                      100%
-    );
+    background: linear-gradient(135deg,
+        var(--color-brand-cyan) 0%,
+        #38BDF8 50%,
+        #7DD3FC 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -123,80 +138,80 @@
 
   /* ── Glassmorphic Card — Light (Ice surface) */
   .glass-card {
-    background:         rgba(240, 249, 255, 0.65);
-    backdrop-filter:    blur(12px);
+    background: rgba(240, 249, 255, 0.65);
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border:             1px solid var(--color-brand-border);
-    border-radius:      var(--radius-card);
+    border: 1px solid var(--color-brand-border);
+    border-radius: var(--radius-card);
   }
 
   /* ── Glassmorphic Card — Dark (Navy surface) */
   .glass-dark {
-    background:         rgba(15, 23, 42, 0.75);
-    backdrop-filter:    blur(14px);
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border:             1px solid rgba(186, 230, 253, 0.15);
+    border: 1px solid rgba(186, 230, 253, 0.15);
   }
 
   /* ── Primary Button */
   .btn-primary {
-    display:          inline-flex;
-    align-items:      center;
-    gap:              0.5rem;
-    justify-content:  center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
     background-color: var(--color-brand-cyan);
-    color:            #ffffff;
-    font-family:      var(--font-heading);
-    font-weight:      var(--font-weight-heading-base);
-    font-size:        0.9375rem;
-    padding:          0.75rem 1.75rem;
-    border-radius:    var(--radius-btn);
-    border:           none;
-    text-decoration:  none;
-    cursor:           pointer;
-    box-shadow:       var(--shadow-cyan-sm);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-base);
+    font-size: 0.9375rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-btn);
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-cyan-sm);
     transition:
       background-color 0.2s ease,
-      transform        0.15s ease,
-      box-shadow       0.2s ease;
+      transform 0.15s ease,
+      box-shadow 0.2s ease;
   }
 
   .btn-primary:hover {
     background-color: var(--color-brand-cyan-dark);
-    transform:        translateY(-1px);
-    box-shadow:       var(--shadow-cyan-lg);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-cyan-lg);
   }
 
   .btn-primary:active {
-    transform:   translateY(0);
-    box-shadow:  var(--shadow-cyan-sm);
+    transform: translateY(0);
+    box-shadow: var(--shadow-cyan-sm);
   }
 
   /* ── Outline Button */
   .btn-outline {
-    display:          inline-flex;
-    align-items:      center;
-    gap:              0.5rem;
-    justify-content:  center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
     background-color: transparent;
-    color:            var(--color-brand-cyan);
-    font-family:      var(--font-heading);
-    font-weight:      var(--font-weight-heading-base);
-    font-size:        0.9375rem;
-    padding:          0.75rem 1.75rem;
-    border-radius:    var(--radius-btn);
-    border:           1.5px solid var(--color-brand-cyan);
-    text-decoration:  none;
-    cursor:           pointer;
+    color: var(--color-brand-cyan);
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-base);
+    font-size: 0.9375rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-btn);
+    border: 1.5px solid var(--color-brand-cyan);
+    text-decoration: none;
+    cursor: pointer;
     transition:
       background-color 0.2s ease,
-      color            0.2s ease,
-      transform        0.15s ease;
+      color 0.2s ease,
+      transform 0.15s ease;
   }
 
   .btn-outline:hover {
     background-color: rgba(14, 165, 233, 0.08);
-    transform:        translateY(-1px);
+    transform: translateY(-1px);
   }
 
   .btn-outline:active {
@@ -205,19 +220,19 @@
 
   /* ── Section Badge */
   .section-badge {
-    display:          inline-flex;
-    align-items:      center;
-    gap:              0.375rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
     background-color: rgba(14, 165, 233, 0.10);
-    color:            var(--color-brand-cyan);
-    font-family:      var(--font-heading);
-    font-size:        0.6875rem;
-    font-weight:      var(--font-weight-heading-base);
-    letter-spacing:   0.08em;
-    text-transform:   uppercase;
-    padding:          0.375rem 0.875rem;
-    border-radius:    var(--radius-badge);
-    border:           1px solid rgba(14, 165, 233, 0.25);
+    color: var(--color-brand-cyan);
+    font-family: var(--font-heading);
+    font-size: 0.6875rem;
+    font-weight: var(--font-weight-heading-base);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-badge);
+    border: 1px solid rgba(14, 165, 233, 0.25);
   }
 
   /* ── Divider */
@@ -228,8 +243,8 @@
 
   /* ── Focus ring for accessibility */
   .focus-brand:focus-visible {
-    outline:        2px solid var(--color-brand-cyan);
+    outline: 2px solid var(--color-brand-cyan);
     outline-offset: 3px;
-    border-radius:  var(--radius-btn);
+    border-radius: var(--radius-btn);
   }
 }
