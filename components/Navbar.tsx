@@ -107,7 +107,7 @@ export default function Navbar() {
               href="/"
               id="navbar-logo"
               className="flex items-center gap-2.5 group"
-              aria-label="Dhaka Founders — Home"
+              aria-label="AfriHub Founders — Home"
             >
               {/* Glowing Icon Mark */}
               <div
@@ -134,7 +134,7 @@ export default function Navbar() {
                 }}
                 className="text-white flex items-center tracking-tight"
               >
-                <span>Dhaka</span>
+                <span>Afri</span>
                 <span
                   style={{
                     background: "linear-gradient(135deg, #38BDF8 0%, #0EA5E9 50%, #0284C7 100%)",
@@ -144,7 +144,7 @@ export default function Navbar() {
                   }}
                   className="ml-0.5"
                 >
-                  Founders
+                  Hub Founders
                 </span>
                 {/* Brand Pulse Indicator */}
                 <span

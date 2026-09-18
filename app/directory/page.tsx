@@ -12,9 +12,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Startup Directory — Dhaka Founders",
+  title: "Startup Directory — AfriHub Founders",
   description:
-    "Discover the visionaries shaping tomorrow's high-growth startups. Browse Bangladesh's most comprehensive founder and startup directory.",
+    "Discover the visionaries shaping tomorrow's high-growth startups. Browse Africa's most comprehensive founder and startup directory.",
 };
 
 const sectors = [
@@ -25,73 +25,73 @@ const sectors = [
 const startups = [
   {
     id: 1,
-    name: "ShopUp",
-    tagline: "Digitizing Bangladesh's informal retail network at scale.",
-    sector: "E-Commerce",
-    stage: "Series B",
-    location: "Dhaka, BD",
-    team: 280,
-    raised: "$75M",
+    name: "Paystack",
+    tagline: "Africa's leading payments infrastructure, powering growth for 200k+ businesses.",
+    sector: "Fintech",
+    stage: "Acquired",
+    location: "Lagos, NG",
+    team: 300,
+    raised: "$8M",
     color: "#0EA5E9",
     hiring: true,
   },
   {
     id: 2,
-    name: "Shajgoj",
-    tagline: "South Asia's largest beauty and personal care platform.",
-    sector: "E-Commerce",
-    stage: "Series A",
-    location: "Dhaka, BD",
-    team: 120,
-    raised: "$8M",
+    name: "Andela",
+    tagline: "Connecting African software talent with global tech companies at scale.",
+    sector: "Future of Work",
+    stage: "Series E",
+    location: "Nairobi, KE",
+    team: 1000,
+    raised: "$381M",
     color: "#7C3AED",
-    hiring: false,
+    hiring: true,
   },
   {
     id: 3,
-    name: "Maya",
-    tagline: "AI-powered health guidance for underserved communities.",
+    name: "54gene",
+    tagline: "Pioneering African genomics research to build more inclusive medicines.",
     sector: "HealthTech",
-    stage: "Series A",
-    location: "Dhaka, BD",
-    team: 65,
-    raised: "$5M",
+    stage: "Series B",
+    location: "Abuja, NG",
+    team: 120,
+    raised: "$45M",
     color: "#059669",
     hiring: true,
   },
   {
     id: 4,
-    name: "Frontier Finance",
-    tagline: "Next-gen digital banking infrastructure for SMEs.",
+    name: "Flutterwave",
+    tagline: "Simplifying payments for endless possibilities across Africa.",
     sector: "Fintech",
-    stage: "Seed",
-    location: "Dhaka, BD",
-    team: 30,
-    raised: "$2.1M",
+    stage: "Series D",
+    location: "San Francisco, US",
+    team: 900,
+    raised: "$474M",
     color: "#D97706",
     hiring: true,
   },
   {
     id: 5,
-    name: "Chaldal",
-    tagline: "Rapid grocery delivery across Dhaka in 30 minutes.",
-    sector: "E-Commerce",
-    stage: "Series B",
-    location: "Dhaka, BD",
-    team: 500,
-    raised: "$10M",
+    name: "Twiga Foods",
+    tagline: "Digitizing Africa's food supply chain from farm to retailer.",
+    sector: "AgriTech",
+    stage: "Series C",
+    location: "Nairobi, KE",
+    team: 450,
+    raised: "$67M",
     color: "#DC2626",
     hiring: false,
   },
   {
     id: 6,
-    name: "10 Minute School",
-    tagline: "Making world-class education accessible for every Bangladeshi.",
+    name: "uLesson",
+    tagline: "Making world-class education accessible for every African student.",
     sector: "EdTech",
-    stage: "Series A",
-    location: "Dhaka, BD",
-    team: 200,
-    raised: "$6.5M",
+    stage: "Series B",
+    location: "Abuja, NG",
+    team: 180,
+    raised: "$21M",
     color: "#0EA5E9",
     hiring: true,
   },
@@ -196,7 +196,7 @@ export default function DirectoryPage() {
           <div className="flex justify-center mb-4">
             <span className="section-badge">
               <Globe size={12} />
-              Bangladesh Startup Ecosystem
+              African Startup Ecosystem
             </span>
           </div>
           <h1
@@ -207,7 +207,7 @@ export default function DirectoryPage() {
             <span className="text-gradient-cyan">Visionaries</span>
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto mb-8">
-            Shaping tomorrow's high-growth startups. Browse {startups.length}+ verified companies across Bangladesh's fastest-growing sectors.
+            Shaping tomorrow's high-growth startups. Browse {startups.length}+ verified companies across Africa's fastest-growing sectors.
           </p>
 
           {/* Search Bar */}

@@ -20,21 +20,21 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Dhaka Founders — Bangladesh's Premier Startup Ecosystem Directory",
+  title: "AfriHub Founders — Africa's Premier Startup Ecosystem Directory",
   description:
-    "Connect, collaborate, and scale with top founders. Discover the visionaries shaping tomorrow's high-growth startups in Bangladesh's premier founder ecosystem.",
+    "Connect, collaborate, and scale with Africa's top founders. Discover the visionaries shaping tomorrow's high-growth startups in Africa's premier founder ecosystem.",
   keywords: [
-    "Bangladesh startups",
-    "Dhaka founders",
-    "startup ecosystem",
-    "founder directory",
-    "Bangladesh tech",
-    "startup funding",
+    "African startups",
+    "AfriHub founders",
+    "startup ecosystem Africa",
+    "founder directory Africa",
+    "Africa tech",
+    "African startup funding",
   ],
   openGraph: {
-    title: "Dhaka Founders — Bangladesh's Premier Startup Ecosystem Directory",
+    title: "AfriHub Founders — Africa's Premier Startup Ecosystem Directory",
     description:
-      "The engine powering Bangladesh's next generation of builders.",
+      "The engine powering Africa's next generation of builders.",
     type: "website",
     locale: "en_US",
   },

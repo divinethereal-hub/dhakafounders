@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Dashboard — Dhaka Founders",
+  title: "Dashboard — AfriHub Founders",
   description: "Manage your founder profile, track your startup metrics, and connect with the ecosystem.",
 };
 

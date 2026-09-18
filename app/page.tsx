@@ -19,10 +19,10 @@ import {
 
 /* ── Static Data ── */
 const stats = [
-  { value: "500+", label: "Verified Founders", icon: Users },
-  { value: "120+", label: "Active Startups", icon: Rocket },
-  { value: "$28M+", label: "Funding Raised", icon: DollarSign },
-  { value: "15+", label: "Industries", icon: Globe },
+  { value: "2,000+", label: "Verified Founders", icon: Users },
+  { value: "600+", label: "Active Startups", icon: Rocket },
+  { value: "$1.2B+", label: "Funding Raised", icon: DollarSign },
+  { value: "54", label: "African Nations", icon: Globe },
 ];
 
 const features = [
@@ -30,7 +30,7 @@ const features = [
     icon: Users,
     title: "Founder Network",
     description:
-      "Connect directly with Bangladesh's most ambitious founders. Support each other's growth and build your network.",
+      "Connect directly with Africa's most ambitious founders. Support each other's growth and build your network.",
   },
   {
     icon: Building2,
@@ -48,13 +48,13 @@ const features = [
     icon: Star,
     title: "Mentor Network",
     description:
-      "Access seasoned operators and investors who've scaled from Dhaka to global markets.",
+      "Access seasoned operators and investors who've scaled from Lagos to global markets.",
   },
   {
     icon: Globe,
     title: "Global Reach",
     description:
-      "Bridge Bangladesh's startup talent to international markets, VCs, and partner networks.",
+      "Bridge Africa's startup talent to international markets, VCs, and partner networks.",
   },
   {
     icon: Zap,
@@ -66,27 +66,27 @@ const features = [
 
 const featuredStartups = [
   {
-    name: "ShopUp",
-    sector: "B2B Commerce",
-    stage: "Series B",
-    description: "Digitizing Bangladesh's informal retail network at scale.",
-    raised: "$75M",
+    name: "Paystack",
+    sector: "Fintech",
+    stage: "Acquired",
+    description: "Africa's leading payments infrastructure, powering growth for 200k+ businesses.",
+    raised: "$8M",
     color: "#0EA5E9",
   },
   {
-    name: "Shajgoj",
-    sector: "Beauty & Wellness",
-    stage: "Series A",
-    description: "South Asia's largest beauty and personal care platform.",
-    raised: "$8M",
+    name: "Andela",
+    sector: "Future of Work",
+    stage: "Series E",
+    description: "Connecting African software talent with global tech companies at scale.",
+    raised: "$381M",
     color: "#7C3AED",
   },
   {
-    name: "Maya",
+    name: "54gene",
     sector: "HealthTech",
-    stage: "Series A",
-    description: "AI-powered health guidance for underserved communities.",
-    raised: "$5M",
+    stage: "Series B",
+    description: "Pioneering African genomics research to build more inclusive medicines.",
+    raised: "$45M",
     color: "#059669",
   },
 ];
@@ -249,7 +249,7 @@ export default async function HomePage() {
           <div className="flex justify-center mb-8">
             <span className="section-badge">
               <Zap size={12} />
-              Bangladesh's Premier Startup Ecosystem
+              Africa's Premier Startup Ecosystem
             </span>
           </div>
 
@@ -261,7 +261,7 @@ export default async function HomePage() {
             The Engine Powering
             <br />
             <span className="text-gradient-cyan">
-              Bangladesh's Next Generation
+              Africa's Next Generation
             </span>
             <br />
             of Builders.
@@ -288,8 +288,8 @@ export default async function HomePage() {
           {/* Trust line */}
           <p className="mt-10 text-sm text-slate-500">
             Trusted by{" "}
-            <span className="text-white font-semibold">500+ founders</span>{" "}
-            across Bangladesh's fastest-growing startups.
+            <span className="text-white font-semibold">2,000+ founders</span>{" "}
+            across Africa's fastest-growing startups.
           </p>
         </div>
 

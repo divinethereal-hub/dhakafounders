@@ -46,7 +46,7 @@ export default function Footer() {
                 Ready to join the ecosystem?
               </h3>
               <p className="text-slate-400 text-sm">
-                Support each other's growth and build your network with Bangladesh's top founders.
+                Support each other's growth and build your network with Africa's top founders.
               </p>
             </div>
             <Link
@@ -76,11 +76,11 @@ export default function Footer() {
                 className="font-bold text-lg text-white"
                 style={{ fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', sans-serif)" }}
               >
-                Dhaka<span className="text-gradient-cyan">Founders</span>
+                AfriHub<span className="text-gradient-cyan">Founders</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-slate-400 mb-6">
-              The engine powering Bangladesh's next generation of builders.
+              The engine powering Africa's next generation of builders.
               Institutional credibility blended with startup ambition.
             </p>
             <div className="flex items-center gap-3">
@@ -129,7 +129,7 @@ export default function Footer() {
           style={{ borderTop: "1px solid rgba(186, 230, 253, 0.1)" }}
         >
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} DhakaFounders. All rights reserved. Built in Dhaka 🇧🇩
+            © {new Date().getFullYear()} AfriHub Founders. All rights reserved. Built for Africa 🌍
           </p>
           <div className="flex items-center gap-4 text-xs text-slate-500">
             <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
