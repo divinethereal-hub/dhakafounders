@@ -1,4 +1,9 @@
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
+
+// This page uses cookies() for the Supabase client — opt out of static pre-rendering
+export const dynamic = "force-dynamic";
 import {
   ArrowRight,
   Users,
@@ -195,7 +200,24 @@ function StartupCard({
 }
 
 /* ── Page ── */
-export default function HomePage() {
+export default async function HomePage() {
+  /* ── Supabase connection test (server-side, console only) ── */
+  try {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      console.error("[Supabase] Connection test failed:", error.message);
+    } else {
+      console.log(
+        "[Supabase] ✅ Connection successful. Session:",
+        data.session ? "Active session found" : "No active session (expected for anonymous users)"
+      );
+    }
+  } catch (err) {
+    console.error("[Supabase] Unexpected error during connection test:", err);
+  }
+
   return (
     <>
       {/* ══ HERO ══ */}
