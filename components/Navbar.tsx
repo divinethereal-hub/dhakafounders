@@ -11,74 +11,13 @@ const navLinks = [
   { label: "About",      href: "#about" },
 ];
 
-/* ─────────────────────────────────────────────────
-   Inline styles as constants — keeps JSX readable
-───────────────────────────────────────────────── */
-const logoIconStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
-  boxShadow: "0 0 16px rgba(14, 165, 233, 0.4)",
-};
-
-const logoWordStyle: React.CSSProperties = {
-  fontFamily: "var(--font-heading, 'Plus Jakarta Sans', sans-serif)",
-  fontWeight: 800,
-  fontSize: "1.2rem",
-  letterSpacing: "-0.02em",
-};
-
-const navLinkStyle: React.CSSProperties = {
-  fontFamily: "var(--font-body, 'Inter', sans-serif)",
-  fontWeight: 500,
-  fontSize: "0.875rem",
-};
-
-const joinBtnStyle: React.CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "0.375rem",
-  background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
-  color: "#fff",
-  fontFamily: "var(--font-heading, 'Plus Jakarta Sans', sans-serif)",
-  fontWeight: 700,
-  fontSize: "0.875rem",
-  padding: "0.5rem 1.125rem",
-  borderRadius: "0.5rem",
-  border: "none",
-  cursor: "pointer",
-  textDecoration: "none",
-  boxShadow: "0 4px 20px rgba(14, 165, 233, 0.35)",
-  transition: "box-shadow 0.25s ease, transform 0.18s ease, filter 0.25s ease",
-};
-
-const joinBtnHoverStyle: React.CSSProperties = {
-  boxShadow: "0 6px 28px rgba(14, 165, 233, 0.55)",
-  transform: "translateY(-1px)",
-  filter: "brightness(1.08)",
-};
-
-const signInBtnStyle: React.CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "0.375rem",
-  color: "#94A3B8",
-  fontFamily: "var(--font-heading, 'Plus Jakarta Sans', sans-serif)",
-  fontWeight: 600,
-  fontSize: "0.875rem",
-  padding: "0.5rem 1rem",
-  borderRadius: "0.5rem",
-  border: "1px solid rgba(186, 230, 253, 0.2)",
-  textDecoration: "none",
-  transition: "color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease",
-  background: "transparent",
-};
-
 export default function Navbar() {
-  const [isOpen, setIsOpen]       = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
+  const [isOpen, setIsOpen]           = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
   const [joinHovered, setJoinHovered] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -89,160 +28,223 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
+  /* ── Dynamic Glassmorphic Navbar Container ── */
   const headerStyle: React.CSSProperties = {
     position: "fixed",
     top: 0,
     left: 0,
     right: 0,
     zIndex: 50,
-    transition: "background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
-    /* Always blurred glass — deepens on scroll */
-    backdropFilter: "blur(18px)",
-    WebkitBackdropFilter: "blur(18px)",
+    transition: "background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
+    backdropFilter: "blur(20px) saturate(180%)",
+    WebkitBackdropFilter: "blur(20px) saturate(180%)",
     background: scrolled
-      ? "rgba(15, 23, 42, 0.82)"
-      : "rgba(15, 23, 42, 0.45)",
+      ? "rgba(15, 23, 42, 0.88)"
+      : "rgba(15, 23, 42, 0.65)",
     borderBottom: scrolled
-      ? "1px solid rgba(186, 230, 253, 0.12)"
-      : "1px solid rgba(186, 230, 253, 0.06)",
+      ? "1px solid rgba(186, 230, 253, 0.16)"
+      : "1px solid rgba(186, 230, 253, 0.08)",
     boxShadow: scrolled
-      ? "0 4px 32px rgba(0, 0, 0, 0.35)"
-      : "none",
+      ? "0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08)"
+      : "0 4px 20px -2px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
   };
 
-  /* Cyan accent line at very top */
+  /* ── Cyan Accent Glow Line ── */
   const accentLineStyle: React.CSSProperties = {
     position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     height: "2px",
-    background: "linear-gradient(90deg, transparent 0%, #0EA5E9 40%, #38BDF8 60%, transparent 100%)",
-    opacity: scrolled ? 1 : 0.6,
+    background: "linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.3) 20%, #0EA5E9 50%, #38BDF8 65%, transparent 100%)",
+    boxShadow: "0 0 12px rgba(14, 165, 233, 0.7)",
+    opacity: scrolled ? 1 : 0.75,
     transition: "opacity 0.35s ease",
+  };
+
+  /* ── Join Button Styles (Brand Cyan + Subtle Hover Animation) ── */
+  const joinBtnStyle: React.CSSProperties = {
+    position: "relative",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.4rem",
+    background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+    color: "#FFFFFF",
+    fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+    fontWeight: 700,
+    fontSize: "0.875rem",
+    padding: "0.5625rem 1.25rem",
+    borderRadius: "0.625rem",
+    border: "1px solid rgba(186, 230, 253, 0.35)",
+    cursor: "pointer",
+    textDecoration: "none",
+    boxShadow: joinHovered
+      ? "0 8px 28px rgba(14, 165, 233, 0.55), 0 0 15px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35)"
+      : "0 4px 16px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25)",
+    transform: joinHovered ? "translateY(-1.5px)" : "translateY(0)",
+    filter: joinHovered ? "brightness(1.06)" : "brightness(1)",
+    transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+    overflow: "hidden",
   };
 
   return (
     <>
       <header style={headerStyle} aria-label="Main navigation">
-        {/* Top accent line */}
+        {/* Top cyan accent line */}
         <div style={accentLineStyle} aria-hidden="true" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
-            {/* ── Logo ── */}
+            {/* ── Logo with Brand Heading Typography ── */}
             <Link
               href="/"
               id="navbar-logo"
               className="flex items-center gap-2.5 group"
               aria-label="Dhaka Founders — Home"
             >
-              {/* Icon mark */}
+              {/* Glowing Icon Mark */}
               <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105"
-                style={logoIconStyle}
+                className="relative w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_24px_rgba(14,165,233,0.6)]"
+                style={{
+                  background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+                  boxShadow: "0 0 18px rgba(14, 165, 233, 0.45)",
+                  border: "1px solid rgba(186, 230, 253, 0.4)",
+                }}
               >
-                <Zap size={17} className="text-white" fill="white" />
+                <Zap
+                  size={17}
+                  className="text-white fill-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                />
               </div>
 
-              {/* Wordmark */}
-              <span style={logoWordStyle} className="text-white tracking-tight">
-                Dhaka
+              {/* Authoritative Heading Typography (Plus Jakarta Sans 800) */}
+              <span
+                style={{
+                  fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                  fontWeight: 800,
+                  fontSize: "1.25rem",
+                  letterSpacing: "-0.03em",
+                }}
+                className="text-white flex items-center tracking-tight"
+              >
+                <span>Dhaka</span>
                 <span
                   style={{
-                    background: "linear-gradient(135deg, #0EA5E9 0%, #38BDF8 60%, #7DD3FC 100%)",
+                    background: "linear-gradient(135deg, #38BDF8 0%, #0EA5E9 50%, #0284C7 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
                   }}
+                  className="ml-0.5"
                 >
                   Founders
                 </span>
+                {/* Brand Pulse Indicator */}
+                <span
+                  className="inline-block w-1.5 h-1.5 ml-1.5 rounded-full bg-[#0EA5E9] shadow-[0_0_8px_#0EA5E9]"
+                  aria-hidden="true"
+                />
               </span>
             </Link>
 
-            {/* ── Desktop Nav ── */}
-            <nav className="hidden md:flex items-center gap-6" aria-label="Primary">
+            {/* ── Desktop Nav Links ── */}
+            <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Primary">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   id={`navbar-link-${link.label.toLowerCase()}`}
-                  style={navLinkStyle}
-                  className="relative text-slate-400 hover:text-white transition-colors duration-200 py-1 group"
+                  style={{
+                    fontFamily: "var(--font-inter, var(--font-body, 'Inter', sans-serif))",
+                    fontWeight: 500,
+                    fontSize: "0.875rem",
+                  }}
+                  className="relative px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 group"
                 >
                   {link.label}
-                  {/* Animated underline */}
+                  {/* Subtle hover indicator glow */}
                   <span
                     aria-hidden="true"
                     style={{
                       position: "absolute",
-                      bottom: "-2px",
-                      left: 0,
-                      height: "1.5px",
+                      bottom: "0px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      height: "2px",
                       width: "0%",
                       background: "linear-gradient(90deg, #0EA5E9, #38BDF8)",
                       borderRadius: "9999px",
+                      boxShadow: "0 0 8px rgba(14, 165, 233, 0.8)",
                       transition: "width 0.25s ease",
                     }}
-                    className="group-hover:w-full"
+                    className="group-hover:w-3/5"
                   />
                 </Link>
               ))}
             </nav>
 
             {/* ── CTA Buttons ── */}
-            <div className="hidden md:flex items-center gap-2">
-              {/* Sign In — ghost */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Sign In — Glass/Ghost Button */}
               <Link
                 href="/dashboard"
                 id="navbar-signin"
-                style={signInBtnStyle}
-                className="hover:text-white hover:border-cyan-400/50 hover:bg-white/5"
+                style={{
+                  fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                  fontWeight: 600,
+                  fontSize: "0.875rem",
+                }}
+                className="inline-flex items-center justify-center px-3.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/8 border border-white/10 hover:border-cyan-400/40 transition-all duration-200"
               >
                 Sign In
               </Link>
 
-              {/* Join Free — primary gradient CTA */}
+              {/* Join Free — High-contrast Primary Cyan Button with Hover Animation */}
               <Link
                 href="/directory"
                 id="navbar-join"
-                style={{
-                  ...joinBtnStyle,
-                  ...(joinHovered ? joinBtnHoverStyle : {}),
-                }}
+                style={joinBtnStyle}
                 onMouseEnter={() => setJoinHovered(true)}
                 onMouseLeave={() => setJoinHovered(false)}
+                className="group/joinbtn active:scale-[0.98]"
               >
-                Join Free
-                <ArrowUpRight size={14} strokeWidth={2.5} />
+                <span>Join Free</span>
+                <ArrowUpRight
+                  size={14}
+                  strokeWidth={2.5}
+                  className="transition-transform duration-200 group-hover/joinbtn:translate-x-0.5 group-hover/joinbtn:-translate-y-0.5"
+                />
               </Link>
             </div>
 
-            {/* ── Mobile Toggle ── */}
+            {/* ── Mobile Menu Toggle Button ── */}
             <button
               id="navbar-mobile-toggle"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-white transition-colors duration-200 hover:bg-white/10"
-              style={{ border: "1px solid rgba(186, 230, 253, 0.15)" }}
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg text-white transition-all duration-200 hover:bg-white/10"
+              style={{
+                border: "1px solid rgba(186, 230, 253, 0.15)",
+                background: "rgba(255, 255, 255, 0.04)",
+              }}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
-        {/* ── Mobile Drawer ── */}
+        {/* ── Mobile Glassmorphism Drawer ── */}
         {isOpen && (
           <div
             className="md:hidden"
             style={{
-              background: "rgba(10, 18, 35, 0.97)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              borderTop: "1px solid rgba(186, 230, 253, 0.1)",
+              background: "rgba(15, 23, 42, 0.95)",
+              backdropFilter: "blur(24px) saturate(180%)",
+              WebkitBackdropFilter: "blur(24px) saturate(180%)",
+              borderTop: "1px solid rgba(186, 230, 253, 0.12)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
               animation: "slideDown 0.22s ease forwards",
             }}
           >
@@ -255,7 +257,10 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  style={{ fontFamily: "var(--font-body, 'Inter', sans-serif)", fontWeight: 500 }}
+                  style={{
+                    fontFamily: "var(--font-inter, var(--font-body, 'Inter', sans-serif))",
+                    fontWeight: 500,
+                  }}
                   className="text-slate-300 hover:text-white py-3 px-3 rounded-xl hover:bg-white/8 transition-all duration-200 text-sm border border-transparent hover:border-white/10"
                 >
                   {link.label}
@@ -265,7 +270,7 @@ export default function Navbar() {
               {/* Mobile CTAs */}
               <div
                 className="flex flex-col gap-2.5 mt-4 pt-4"
-                style={{ borderTop: "1px solid rgba(186, 230, 253, 0.1)" }}
+                style={{ borderTop: "1px solid rgba(186, 230, 253, 0.12)" }}
               >
                 <Link
                   href="/dashboard"
@@ -273,7 +278,7 @@ export default function Navbar() {
                   className="text-center text-sm font-semibold text-slate-300 py-3 rounded-xl border transition-colors hover:text-white hover:border-cyan-400/40"
                   style={{
                     borderColor: "rgba(186, 230, 253, 0.2)",
-                    fontFamily: "var(--font-heading, 'Plus Jakarta Sans', sans-serif)",
+                    fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
                   }}
                 >
                   Sign In
@@ -281,14 +286,19 @@ export default function Navbar() {
                 <Link
                   href="/directory"
                   onClick={() => setIsOpen(false)}
-                  className="text-center text-sm font-bold text-white py-3 rounded-xl flex items-center justify-center gap-2"
+                  className="group/mjoin text-center text-sm font-bold text-white py-3 rounded-xl flex items-center justify-center gap-2 border border-sky-300/30 active:scale-[0.98] transition-all duration-200"
                   style={{
-                    background: "linear-gradient(135deg, #0EA5E9, #0284C7)",
-                    boxShadow: "0 4px 20px rgba(14, 165, 233, 0.4)",
-                    fontFamily: "var(--font-heading, 'Plus Jakarta Sans', sans-serif)",
+                    background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+                    boxShadow: "0 4px 20px rgba(14, 165, 233, 0.45)",
+                    fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
                   }}
                 >
-                  Join Free <ArrowUpRight size={15} strokeWidth={2.5} />
+                  <span>Join Free</span>
+                  <ArrowUpRight
+                    size={15}
+                    strokeWidth={2.5}
+                    className="group-hover/mjoin:translate-x-0.5 group-hover/mjoin:-translate-y-0.5 transition-transform duration-200"
+                  />
                 </Link>
               </div>
             </nav>
