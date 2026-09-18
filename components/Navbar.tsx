@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, Zap, ArrowUpRight } from "lucide-react";
+import {
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 
 const navLinks = [
   { label: "Directory",  href: "/directory" },
@@ -186,36 +192,66 @@ export default function Navbar() {
 
             {/* ── CTA Buttons ── */}
             <div className="hidden md:flex items-center gap-3">
-              {/* Sign In — Glass/Ghost Button */}
-              <Link
-                href="/dashboard"
-                id="navbar-signin"
-                style={{
-                  fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
-                  fontWeight: 600,
-                  fontSize: "0.875rem",
-                }}
-                className="inline-flex items-center justify-center px-3.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/8 border border-white/10 hover:border-cyan-400/40 transition-all duration-200"
-              >
-                Sign In
-              </Link>
+              <Show when="signed-out">
+                {/* Sign In — Glass/Ghost Button */}
+                <SignInButton mode="modal">
+                  <button
+                    id="navbar-signin"
+                    style={{
+                      fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                      fontWeight: 600,
+                      fontSize: "0.875rem",
+                    }}
+                    className="inline-flex items-center justify-center px-3.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/8 border border-white/10 hover:border-cyan-400/40 transition-all duration-200 cursor-pointer"
+                  >
+                    Sign In
+                  </button>
+                </SignInButton>
 
-              {/* Join Free — High-contrast Primary Cyan Button with Hover Animation */}
-              <Link
-                href="/directory"
-                id="navbar-join"
-                style={joinBtnStyle}
-                onMouseEnter={() => setJoinHovered(true)}
-                onMouseLeave={() => setJoinHovered(false)}
-                className="group/joinbtn active:scale-[0.98]"
-              >
-                <span>Join Free</span>
-                <ArrowUpRight
-                  size={14}
-                  strokeWidth={2.5}
-                  className="transition-transform duration-200 group-hover/joinbtn:translate-x-0.5 group-hover/joinbtn:-translate-y-0.5"
+                {/* Sign Up — High-contrast Primary Cyan Button with Hover Animation */}
+                <SignUpButton mode="modal">
+                  <button
+                    id="navbar-join"
+                    style={joinBtnStyle}
+                    onMouseEnter={() => setJoinHovered(true)}
+                    onMouseLeave={() => setJoinHovered(false)}
+                    className="group/joinbtn active:scale-[0.98]"
+                  >
+                    <span>Join Free</span>
+                    <ArrowUpRight
+                      size={14}
+                      strokeWidth={2.5}
+                      className="transition-transform duration-200 group-hover/joinbtn:translate-x-0.5 group-hover/joinbtn:-translate-y-0.5"
+                    />
+                  </button>
+                </SignUpButton>
+              </Show>
+
+              <Show when="signed-in">
+                {/* Dashboard link for signed-in users */}
+                <Link
+                  href="/dashboard"
+                  id="navbar-dashboard"
+                  style={{
+                    fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                    fontWeight: 600,
+                    fontSize: "0.875rem",
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/8 border border-white/10 hover:border-cyan-400/40 transition-all duration-200"
+                >
+                  Dashboard
+                  <ArrowUpRight size={13} strokeWidth={2.5} className="opacity-60" />
+                </Link>
+
+                {/* User avatar + account menu */}
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-9 h-9 ring-2 ring-cyan-400/40 hover:ring-cyan-400/70 transition-all duration-200",
+                    },
+                  }}
                 />
-              </Link>
+              </Show>
             </div>
 
             {/* ── Mobile Menu Toggle Button ── */}
@@ -272,34 +308,77 @@ export default function Navbar() {
                 className="flex flex-col gap-2.5 mt-4 pt-4"
                 style={{ borderTop: "1px solid rgba(186, 230, 253, 0.12)" }}
               >
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsOpen(false)}
-                  className="text-center text-sm font-semibold text-slate-300 py-3 rounded-xl border transition-colors hover:text-white hover:border-cyan-400/40"
-                  style={{
-                    borderColor: "rgba(186, 230, 253, 0.2)",
-                    fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
-                  }}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/directory"
-                  onClick={() => setIsOpen(false)}
-                  className="group/mjoin text-center text-sm font-bold text-white py-3 rounded-xl flex items-center justify-center gap-2 border border-sky-300/30 active:scale-[0.98] transition-all duration-200"
-                  style={{
-                    background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
-                    boxShadow: "0 4px 20px rgba(14, 165, 233, 0.45)",
-                    fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
-                  }}
-                >
-                  <span>Join Free</span>
-                  <ArrowUpRight
-                    size={15}
-                    strokeWidth={2.5}
-                    className="group-hover/mjoin:translate-x-0.5 group-hover/mjoin:-translate-y-0.5 transition-transform duration-200"
-                  />
-                </Link>
+                <Show when="signed-out">
+                  <SignInButton mode="modal">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="w-full text-center text-sm font-semibold text-slate-300 py-3 rounded-xl border transition-colors hover:text-white hover:border-cyan-400/40 cursor-pointer"
+                      style={{
+                        borderColor: "rgba(186, 230, 253, 0.2)",
+                        background: "transparent",
+                        fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                      }}
+                    >
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="group/mjoin w-full text-center text-sm font-bold text-white py-3 rounded-xl flex items-center justify-center gap-2 border border-sky-300/30 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+                      style={{
+                        background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+                        boxShadow: "0 4px 20px rgba(14, 165, 233, 0.45)",
+                        fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                      }}
+                    >
+                      <span>Join Free</span>
+                      <ArrowUpRight
+                        size={15}
+                        strokeWidth={2.5}
+                        className="group-hover/mjoin:translate-x-0.5 group-hover/mjoin:-translate-y-0.5 transition-transform duration-200"
+                      />
+                    </button>
+                  </SignUpButton>
+                </Show>
+
+                <Show when="signed-in">
+                  {/* User row: avatar + label */}
+                  <div className="flex items-center gap-3 px-1 py-2">
+                    <UserButton
+                      appearance={{
+                        elements: {
+                          avatarBox: "w-9 h-9 ring-2 ring-cyan-400/40",
+                        },
+                      }}
+                    />
+                    <span
+                      className="text-sm text-slate-300"
+                      style={{ fontFamily: "var(--font-inter, sans-serif)", fontWeight: 500 }}
+                    >
+                      My Account
+                    </span>
+                  </div>
+
+                  {/* Dashboard CTA */}
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="group/dash w-full text-center text-sm font-bold text-white py-3 rounded-xl flex items-center justify-center gap-2 border border-sky-300/30 active:scale-[0.98] transition-all duration-200"
+                    style={{
+                      background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+                      boxShadow: "0 4px 20px rgba(14, 165, 233, 0.45)",
+                      fontFamily: "var(--font-plus-jakarta, var(--font-heading, 'Plus Jakarta Sans', sans-serif))",
+                    }}
+                  >
+                    <span>Go to Dashboard</span>
+                    <ArrowUpRight
+                      size={15}
+                      strokeWidth={2.5}
+                      className="group-hover/dash:translate-x-0.5 group-hover/dash:-translate-y-0.5 transition-transform duration-200"
+                    />
+                  </Link>
+                </Show>
               </div>
             </nav>
           </div>
