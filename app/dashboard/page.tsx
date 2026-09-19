@@ -12,6 +12,7 @@ import {
   DollarSign,
   Eye,
   ChevronRight,
+  PenLine,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ const recentActivity = [
 ];
 
 const quickLinks = [
-  { label: "Edit Profile", href: "#", icon: Settings },
+  { label: "Update Company Profile", href: "/dashboard/profile", icon: PenLine },
   { label: "Browse Directory", href: "/directory", icon: LayoutDashboard },
   { label: "Funding Tracker", href: "#", icon: TrendingUp },
   { label: "Mentors", href: "#", icon: Star },
@@ -81,6 +82,21 @@ export default function DashboardPage() {
               >
                 <Bell size={18} />
               </button>
+              {/* Update Company Profile — ghost secondary button */}
+              <Link
+                href="/dashboard/profile"
+                id="dashboard-update-profile"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white transition-all duration-200"
+                style={{
+                  border: "1px solid rgba(186, 230, 253, 0.2)",
+                  background: "rgba(255,255,255,0.05)",
+                  fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', sans-serif)",
+                }}
+              >
+                <PenLine size={15} />
+                Update Profile
+              </Link>
+
               <Link
                 href="/directory"
                 className="btn-primary text-sm"
@@ -95,6 +111,42 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-20">
+
+        {/* ── Update Company Profile Banner ── */}
+        <Link
+          href="/dashboard/profile"
+          id="dashboard-profile-banner"
+          className="group flex items-center justify-between w-full rounded-2xl px-6 py-5 mb-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/20"
+          style={{
+            background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 60%, #075985 100%)",
+            boxShadow: "0 4px 24px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
+            border: "1px solid rgba(186, 230, 253, 0.3)",
+          }}
+        >
+          <div className="flex items-center gap-4">
+            <div
+              className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+              style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.25)" }}
+            >
+              <PenLine size={20} className="text-white" />
+            </div>
+            <div>
+              <p
+                className="text-white font-bold text-base"
+                style={{ fontFamily: "var(--font-plus-jakarta, 'Plus Jakarta Sans', sans-serif)" }}
+              >
+                Update Company Profile
+              </p>
+              <p className="text-sky-100/80 text-xs mt-0.5">
+                Keep your startup details, funding info, and team up to date.
+              </p>
+            </div>
+          </div>
+          <ArrowUpRight
+            size={22}
+            className="text-white/70 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+          />
+        </Link>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
