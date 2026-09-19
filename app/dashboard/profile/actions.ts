@@ -4,11 +4,15 @@ import { auth } from "@clerk/nextjs/server";
 import { createClient } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 
-// RLS is disabled on company_profile — anon key is sufficient for server actions.
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-);
+// RLS is disabled on company_profile — publishable key is sufficient for server actions.
+// We use NEXT_PUBLIC_SUPABASE_ANON_KEY (classic eyJ JWT) if available,
+// falling back to the PUBLISHABLE_KEY for newer Supabase projects.
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export type ProfileFormState = {
   success: boolean;

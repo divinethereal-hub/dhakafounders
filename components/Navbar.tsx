@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, Zap, ArrowUpRight } from "lucide-react";
 import {
   Show,
@@ -18,9 +19,18 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen]           = useState(false);
   const [scrolled, setScrolled]       = useState(false);
   const [joinHovered, setJoinHovered] = useState(false);
+
+  // A link is active when the pathname starts with its href (exact for "/")
+  const isActive = (href: string) =>
+    href.startsWith("#")
+      ? false
+      : href === "/"
+      ? pathname === "/"
+      : pathname.startsWith(href);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -154,40 +164,63 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* ── Desktop Nav Links ── */}
             <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Primary">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  id={`navbar-link-${link.label.toLowerCase()}`}
-                  style={{
-                    fontFamily: "var(--font-inter, var(--font-body, 'Inter', sans-serif))",
-                    fontWeight: 500,
-                    fontSize: "0.875rem",
-                  }}
-                  className="relative px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 group"
-                >
-                  {link.label}
-                  {/* Subtle hover indicator glow */}
-                  <span
-                    aria-hidden="true"
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                const isDirectory = link.href === "/directory";
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    id={`navbar-link-${link.label.toLowerCase()}`}
+                    aria-current={active ? "page" : undefined}
                     style={{
-                      position: "absolute",
-                      bottom: "0px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      height: "2px",
-                      width: "0%",
-                      background: "linear-gradient(90deg, #0EA5E9, #38BDF8)",
-                      borderRadius: "9999px",
-                      boxShadow: "0 0 8px rgba(14, 165, 233, 0.8)",
-                      transition: "width 0.25s ease",
+                      fontFamily: "var(--font-inter, var(--font-body, 'Inter', sans-serif))",
+                      fontWeight: active ? 600 : 500,
+                      fontSize: "0.875rem",
+                      color: active ? "#ffffff" : undefined,
+                      background: active ? "rgba(14, 165, 233, 0.10)" : undefined,
+                      border: active
+                        ? "1px solid rgba(14, 165, 233, 0.25)"
+                        : "1px solid transparent",
                     }}
-                    className="group-hover:w-3/5"
-                  />
-                </Link>
-              ))}
+                    className="relative px-3.5 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 group flex items-center gap-1.5"
+                  >
+                    {link.label}
+
+                    {/* Directory badge dot — always visible to signal primary feature */}
+                    {isDirectory && (
+                      <span
+                        aria-hidden="true"
+                        className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{
+                          background: active ? "#0EA5E9" : "rgba(14, 165, 233, 0.55)",
+                          boxShadow: active ? "0 0 6px #0EA5E9" : "none",
+                          transition: "all 0.2s ease",
+                        }}
+                      />
+                    )}
+
+                    {/* Cyan underline — full-width when active, animates in on hover */}
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        bottom: "0px",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        height: "2px",
+                        width: active ? "60%" : "0%",
+                        background: "linear-gradient(90deg, #0EA5E9, #38BDF8)",
+                        borderRadius: "9999px",
+                        boxShadow: active ? "0 0 8px rgba(14, 165, 233, 0.8)" : "none",
+                        transition: "width 0.25s ease, box-shadow 0.25s ease",
+                      }}
+                      className={active ? undefined : "group-hover:w-3/5"}
+                    />
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* ── CTA Buttons ── */}
@@ -288,20 +321,43 @@ export default function Navbar() {
               className="flex flex-col px-4 py-5 gap-1"
               aria-label="Mobile navigation"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  style={{
-                    fontFamily: "var(--font-inter, var(--font-body, 'Inter', sans-serif))",
-                    fontWeight: 500,
-                  }}
-                  className="text-slate-300 hover:text-white py-3 px-3 rounded-xl hover:bg-white/8 transition-all duration-200 text-sm border border-transparent hover:border-white/10"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                  const active = isActive(link.href);
+                  const isDirectory = link.href === "/directory";
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      style={{
+                        fontFamily: "var(--font-inter, var(--font-body, 'Inter', sans-serif))",
+                        fontWeight: active ? 600 : 500,
+                        color: active ? "#ffffff" : undefined,
+                        background: active ? "rgba(14, 165, 233, 0.08)" : undefined,
+                        borderColor: active
+                          ? "rgba(14, 165, 233, 0.35)"
+                          : "transparent",
+                        borderLeftColor: active ? "#0EA5E9" : "transparent",
+                        borderLeftWidth: "2px",
+                      }}
+                      className="flex items-center gap-2 text-slate-300 hover:text-white py-3 px-3 rounded-xl hover:bg-white/8 transition-all duration-200 text-sm border border-transparent hover:border-white/10"
+                    >
+                      {link.label}
+                      {/* Directory badge dot on mobile too */}
+                      {isDirectory && (
+                        <span
+                          aria-hidden="true"
+                          className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{
+                            background: active ? "#0EA5E9" : "rgba(14, 165, 233, 0.55)",
+                            boxShadow: active ? "0 0 6px #0EA5E9" : "none",
+                          }}
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
 
               {/* Mobile CTAs */}
               <div
