@@ -13,6 +13,7 @@ import {
 
 const navLinks = [
   { label: "Directory",  href: "/directory" },
+  { label: "Blog",       href: "/blog" },
   { label: "Dashboard",  href: "/dashboard" },
   { label: "Community",  href: "#community" },
   { label: "About",      href: "#about" },
