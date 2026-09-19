@@ -16,7 +16,7 @@ const navLinks = [
   { label: "Blog",       href: "/blog" },
   { label: "Dashboard",  href: "/dashboard" },
   { label: "Community",  href: "#community" },
-  { label: "About",      href: "#about" },
+  { label: "About",      href: "/about" },
 ];
 
 export default function Navbar() {
